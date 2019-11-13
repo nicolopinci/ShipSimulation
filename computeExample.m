@@ -35,7 +35,7 @@ e_int = 0;
 
 %%% 4th order Runge-Kutta method
 for i=1:length(timespan)-1
-    e = deg2rad(control_function(timespan(i))) + pi/2 - solutionPID(3,i) + desiredAngle; % error (OUTPUT - INPUT + desiredAngle) Note that pi/2 has been added to be coherent with the angle definition in different reference systems
+    e = deg2rad(control_function(timespan(i))) + pi/2 - solutionPID(3,i) - desiredAngle; % error (OUTPUT - INPUT - desiredAngle) Note that pi/2 has been added to be coherent with the angle definition in different reference systems
     e_int = e_int + e; % discrete integration
     
     PID(i) = Kp*e + Ki*e_int*dt + Kd*(wrapTo2Pi(e - e_previous))/dt; % PID function (discrete)
@@ -73,6 +73,7 @@ figure(2);
 hold on
 plot(solution(2,:), solution(1,:));
 title('Ship trajectory')
+set (gca, 'xdir', 'reverse')
 xlabel('y_W [m]')
 ylabel('x_W [m]')
 
@@ -80,7 +81,7 @@ hold on
 plot(solutionPID(2,:), solutionPID(1,:));
 
 hold on
-fplot(@(t) tan(-desiredAngle)*t, 'k.')
+fplot(@(t) tan(desiredAngle)*t, 'k.')
 legend('Without PID','With PID','Objective trajectory')
 
 hold off
