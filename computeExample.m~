@@ -1,5 +1,9 @@
 % Script to run the simulation with predefined parameters
 
+% Plot T0
+plotForceAgainstShaftSpeed(-132, 132, 0.1, 147000, 165000);
+
+% Plot trajectory
 omega = rpmToHz(100); % Initial omega = 100 rpm (= 100/60 Hz)
 
 X0 = [0 0 0 0 0 0]'; % Initial state
@@ -16,15 +20,22 @@ syms control_signal(t)
 control_signal = 30*sin(0.06*t); % rudder movement
 control_function = matlabFunction(control_signal);
 
+disturbance = rand();
+
+control_funcion = control disturbance;
+
 [time, solution] = ode45(@(t, X) systemODE(t, X, invM, D, omega, control_function, 1, true), timespan, X0); 
 solution = solution';
 
 desiredAngle = pi/6; % desired heading angle; 30 degrees --> pi/6 rad
 
 % PID parameters
-Kp = 4;
-Ki = 1/6400;
-Kd = 1/100;
+%Kp = 4;
+%Ki = 1/6400;
+%Kd = 1/100;
+Kp = 10;
+Ki = 0.001;
+Kd = 0.001;
 
 solutionPID = zeros(6, length(timespan)); % the initial solution matrix (dimension timespan x 6) is filled with 0s.
 solutionPID(:,1) = X0; % the initial state is X0 ([0 0 0 0 0 0]')
@@ -35,7 +46,9 @@ e_int = 0;
 
 %%% 4th order Runge-Kutta method
 for i=1:length(timespan)-1
-    e = deg2rad(control_function(timespan(i))) - solutionPID(3,i) + desiredAngle; % error (OUTPUT - INPUT + desiredAngle)
+    %e = deg2rad(control_function(timespan(i))) - solutionPID(3,i) + desiredAngle; % error (INPUT - OUTPUT + desiredAngle)
+    e = desiredAngle - solutionPID(3,i); % error (desiredAngle - OUTPUT)
+
     e_int = e_int + e; % discrete integration
     
     PID(i) = Kp*e + Ki*e_int*dt + Kd*(wrapTo2Pi(e - e_previous))/dt; % PID function (discrete)
@@ -53,7 +66,7 @@ end
 % Figure plot
 
 %Heading
-figure(1)
+figure(2)
 hold on
 plot(time, wrapTo2Pi(solution(3,:)));
 title('Heading with respect to time')
@@ -69,8 +82,8 @@ legend('Without PID','With PID','Objective heading')
 hold off
 
 % Trajectory
-figure(2);
-axis 
+figure(3);
+axis equal tight
 hold on
 plot(solution(2,:), solution(1,:));
 title('Ship trajectory')

@@ -26,9 +26,12 @@ solution = solution';
 desiredAngle = pi/6; % desired heading angle; 30 degrees --> pi/6 rad
 
 % PID parameters
-Kp = 4;
-Ki = 1/6400;
-Kd = 1/100;
+%Kp = 4;
+%Ki = 1/6400;
+%Kd = 1/100;
+Kp = 10;
+Ki = 0.001;
+Kd = 0.001;
 
 solutionPID = zeros(6, length(timespan)); % the initial solution matrix (dimension timespan x 6) is filled with 0s.
 solutionPID(:,1) = X0; % the initial state is X0 ([0 0 0 0 0 0]')
@@ -39,7 +42,9 @@ e_int = 0;
 
 %%% 4th order Runge-Kutta method
 for i=1:length(timespan)-1
-    e = deg2rad(control_function(timespan(i))) - solutionPID(3,i) + desiredAngle; % error (OUTPUT - INPUT + desiredAngle)
+    %e = deg2rad(control_function(timespan(i))) - solutionPID(3,i) + desiredAngle; % error (INPUT - OUTPUT + desiredAngle)
+    e = desiredAngle - solutionPID(3,i); % error (desiredAngle - OUTPUT)
+
     e_int = e_int + e; % discrete integration
     
     PID(i) = Kp*e + Ki*e_int*dt + Kd*(wrapTo2Pi(e - e_previous))/dt; % PID function (discrete)
