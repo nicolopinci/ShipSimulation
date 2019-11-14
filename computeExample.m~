@@ -1,9 +1,5 @@
 % Script to run the simulation with predefined parameters
 
-% Plot T0
-plotForceAgainstShaftSpeed(-132, 132, 0.1, 147000, 165000);
-
-% Plot trajectory
 omega = rpmToHz(100); % Initial omega = 100 rpm (= 100/60 Hz)
 
 X0 = [0 0 0 0 0 0]'; % Initial state
@@ -57,7 +53,7 @@ end
 % Figure plot
 
 %Heading
-figure(2)
+figure(1)
 hold on
 plot(time, wrapTo2Pi(solution(3,:)));
 title('Heading with respect to time')
@@ -73,8 +69,8 @@ legend('Without PID','With PID','Objective heading')
 hold off
 
 % Trajectory
-figure(3);
-axis equal tight
+figure(2);
+axis 
 hold on
 plot(solution(2,:), solution(1,:));
 title('Ship trajectory')
