@@ -11,13 +11,15 @@ X0 = [0 0 0 0 0 0]'; % Initial state
 M = [11 0 0; 0 11 8.4; 0 8.4 5800] * 10^6; % mass matrix
 D = [3 0 0; 0 5.5 6.4; 0 6.4 1200] * 10^5; % linear damping matrix
 
-dt = 10; % timestep
+dt = 0.1; % timestep
 timespan = 0:dt:1000; % simulation interval [s]
 
 invM = inv(M); % inverse of the linear damping matrix (calculated before to reduce computational complexity later)
 
 syms control_signal(t)
 control_signal = 30*sin(0.06*t); % rudder movement
+%disturbance_signal = 30*sin(100*t) + 30*sin(90*t); % disturbance
+
 control_function = matlabFunction(control_signal);
 
 [time, solution] = ode45(@(t, X) systemODE(t, X, invM, D, omega, control_function, 1, true), timespan, X0); 
