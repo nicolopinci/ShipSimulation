@@ -11,7 +11,7 @@ end
 T0 = calculateT0(1.47*10^5, 1.65*10^5, omega, -132, 132);
 
 FxB = [T0*polyval(fD, delta) 0 0];
-FyB = [0 T0*polyval(fL, delta) 0];
+FyB = [0 T0*polyval(fL, delta)/2 0];
 TauzB = cross([41.5 0 0], FxB+FyB); % 41.5 is caused by the reference system change; 7.1 m has not been considered since the propellers are symmetrical
 
 F = [FxB(1) FyB(2) TauzB(3)];
