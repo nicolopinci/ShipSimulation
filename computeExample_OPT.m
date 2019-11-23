@@ -22,7 +22,9 @@ control_signal = 30*sin(0.06*t); % rudder movement
 
 control_function = matlabFunction(control_signal);
 
-[time, solution] = ode45(@(t, X) systemODE(t, X, invM, D, omega, control_function, 1, true), timespan, X0); 
+[fL, fD] = findCoefficient([-45, -40, -30, -20, -10, 0, 10, 20, 30, 40, 45], [-0.46, -0.48, -0.46, -0.38, -0.2, 0, 0.2, 0.38, 0.46, 0.48, 0.46], [0.78, 0.68, 0.48, 0.22, 0.08, 0.02, 0.08, 0.22, 0.48, 0.68, 0.78]);
+
+[time, solution] = ode45(@(t, X) systemODE_OPT(t, X, invM, D, omega, control_function, 1, true, fL, fD), timespan, X0); 
 solution = solution';
 
 desiredAngle = pi/6; % desired heading angle; 30 degrees --> pi/6 rad
@@ -53,10 +55,10 @@ for i=1:length(timespan)-1
     e_previous = e;
         
     % Setting of RK parameters
-    K1 = systemODE(timespan(i), solutionPID(:,i), invM, D, omega, control_function, PID(i), false);
-    K2 = systemODE(timespan(i)+ 0.5*dt, solutionPID(:,i)+0.5*dt*K1, invM, D, omega, control_function, PID(i), false);
-    K3 = systemODE(timespan(i)+ 0.5*dt, solutionPID(:,i)+0.5*dt*K2, invM, D, omega, control_function, PID(i), false);
-    K4 = systemODE(timespan(i)+ dt, solutionPID(:,i)+ dt*K3, invM, D, omega, control_function, PID(i), false);
+    K1 = systemODE_OPT(timespan(i), solutionPID(:,i), invM, D, omega, control_function, PID(i), false, fL, fD);
+    K2 = systemODE_OPT(timespan(i)+ 0.5*dt, solutionPID(:,i)+0.5*dt*K1, invM, D, omega, control_function, PID(i), false, fL, fD);
+    K3 = systemODE_OPT(timespan(i)+ 0.5*dt, solutionPID(:,i)+0.5*dt*K2, invM, D, omega, control_function, PID(i), false, fL, fD);
+    K4 = systemODE_OPT(timespan(i)+ dt, solutionPID(:,i)+ dt*K3, invM, D, omega, control_function, PID(i), false, fL, fD);
 
     solutionPID(:,i+1) = solutionPID(:,i) + dt*(K1/6 + K2/3 + K3/3 + K4/6); % Discrete step
 end

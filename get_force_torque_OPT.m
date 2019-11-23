@@ -1,8 +1,6 @@
-function F = get_force_torque(omega,delta)
-%get_force_torque Summary of this function goes here
+function F = get_force_torque_OPT(omega,delta, fL, fD)
+%get_force_torque_OPT Summary of this function goes here
 %   Detailed explanation goes here
-
-[fL, fD] = findCoefficient([-45, -40, -30, -20, -10, 0, 10, 20, 30, 40, 45], [-0.46, -0.48, -0.46, -0.38, -0.2, 0, 0.2, 0.38, 0.46, 0.48, 0.46], [0.78, 0.68, 0.48, 0.22, 0.08, 0.02, 0.08, 0.22, 0.48, 0.68, 0.78]);
 
 T0 = calculateT0(1.47*10^5, 1.65*10^5, omega, -132, 132);
 

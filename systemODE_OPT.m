@@ -1,5 +1,5 @@
-function dXdt = systemODE(t, X, invM, D, omega, control_signal, pid, bypassPID)
-%systemODE Function to compute the result of the system that describes the
+function dXdt = systemODE_OPT(t, X, invM, D, omega, control_signal, pid, bypassPID, fL, fD)
+%systemODE_OPT Function to compute the result of the system that describes the
 %dynamic of the system.
 %   This function may be used in order to calculate the result of the
 %   matrix calculations describing the dynamics of the system. In
@@ -11,22 +11,20 @@ function dXdt = systemODE(t, X, invM, D, omega, control_signal, pid, bypassPID)
 %   D is the damping matrix
 %   omega, expressed in Hz, is the shaft angular speed
 %   control_signal is the input given to the system (the rudder angle)
-%   pid is the signal tha
+%   pid is the input to the ship system and it takes into account the
+%   contrl signal, the backpropagation and the desired angle.
 
 phi = X(3);
 
-%delta = 30*sin(0.06*t);
-%delta = 30;
 if (bypassPID==false)
-    delta = pid;
+    delta = pid; % the input of the system is the output of the PID
 else
-    delta = control_signal(t);
+    delta = control_signal(t); % there is no PID, so there is only the control signal
 end
  
-
 R = calculateR(phi);
 
-F = get_force_torque(omega, delta);
+F = get_force_torque_OPT(omega, delta, fL, fD);
 F = F';
 
 [A, B] = systemMatrix(R, invM, D, F);
@@ -38,8 +36,9 @@ if rA~=rB
     error("A and B should have the same number of rows");
 end
 
-dXdt = zeros(rA, 1);
+dXdt = zeros(rA, 1); % fill dXdt with 0s
 
+% compute dX/dt = AX + B
 for i=1:rA
     for j=1:cA
         dXdt(i) = dXdt(i) + A(i, j)*X(j);

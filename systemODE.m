@@ -12,7 +12,7 @@ function dXdt = systemODE(t, X, invM, D, omega, control_signal, pid, bypassPID)
 %   omega, expressed in Hz, is the shaft angular speed
 %   control_signal is the input given to the system (the rudder angle)
 %   pid is the input to the ship system and it takes into account the
-%   contrl signal, the backpropagation and the desired angle.
+%   control signal, the backpropagation and the desired angle.
 
 phi = X(3);
 
