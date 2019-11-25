@@ -30,9 +30,6 @@ solution = solution';
 desiredAngle = pi/6; % desired heading angle; 30 degrees --> pi/6 rad
 
 % PID parameters
-%Kp = 4;
-%Ki = 1/6400;
-%Kd = 1/100;
 Kp = 10;
 Ki = 0.001;
 Kd = 0.001;
@@ -73,8 +70,9 @@ plot(time, wrapTo2Pi(solution(3,:)));
 title('Heading with respect to time')
 xlabel('Time [s]')
 ylabel('Heading [rad]')
+grid on
 hold on
-plot(time, solutionPID(3,:)); %atan(-solutionPID(2,:)./solutionPID(1,:))));
+plot(time, solutionPID(3,:));
 
 hold on
 fplot(desiredAngle, 'k.')
@@ -82,15 +80,16 @@ legend('Without PID','With PID','Objective heading')
 
 hold off
 
+
 % Trajectory
 figure(3);
 axis equal tight
 hold on
 plot(solution(2,:), solution(1,:));
 title('Ship trajectory')
-%set (gca, 'xdir', 'reverse')
 xlabel('y_W [m]')
 ylabel('x_W [m]')
+grid on
 
 hold on
 plot(solutionPID(2,:), solutionPID(1,:));

@@ -20,6 +20,7 @@ plot(omega,T0)
 title('Force with respect to shaft speed')
 xlabel('Shaft speed \omega [Hz]')
 ylabel('Force T_0 [N]')
+grid on
 
 end
 
