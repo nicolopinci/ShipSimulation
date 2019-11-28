@@ -26,8 +26,8 @@ liftArray = [-0.46, -0.48, -0.46, -0.38, -0.2, 0, 0.2, 0.38, 0.46, 0.48, 0.46];
 dragArray = [0.78, 0.68, 0.48, 0.22, 0.08, 0.02, 0.08, 0.22, 0.48, 0.68, 0.78];
 
 [fL, fD] = findCoefficient(rudderArray, liftArray, dragArray, 0);
-[fLl, fDl] = findCoefficient(rudderArray, liftArray, dragArray, 0.1/sqrt(12));
-[fLh, fDh] = findCoefficient(rudderArray, liftArray, dragArray, -0.1/sqrt(12));
+[fLl, fDl] = findCoefficient(rudderArray, liftArray, dragArray, 0.5);
+[fLh, fDh] = findCoefficient(rudderArray, liftArray, dragArray, -0.5);
 
 [time, solution] = ode45(@(t, X) systemODE_OPT(t, X, invM, D, omega, control_function, 1, true, fL, fD), timespan, X0); 
 solution = solution';
@@ -103,19 +103,10 @@ ylabel('x_W [m]')
 grid on
 
 hold on
-plot(solutionL(2,:), solutionL(1,:));
-
-grid on
-
-hold on
-plot(solutionH(2,:), solutionH(1,:));
-
-
-hold on
 plot(solutionPID(2,:), solutionPID(1,:));
 
 hold on
 fplot(@(t) tan(pi/2 - desiredAngle)*t, 'k.')
-legend('Without PID','With PID', 'Low', 'High', 'Objective trajectory')
+legend('Without PID','With PID','Objective trajectory')
 
 hold off

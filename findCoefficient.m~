@@ -9,19 +9,13 @@ function [fL, fD] = findCoefficient(rudderArray,liftArray, dragArray, err)
 % fL = L/T0
 % fD = 1-D/T0
 
-
-
+for(int 
 if not(and(length(liftArray) == length(dragArray), length(dragArray) == length(rudderArray)))
     error("Please use arrays with the same size");
 end
 
 realDrag = [];
 realLift = liftArray;
-
-for j=1:length(rudderArray)
-    dragArray(j) = dragArray(j)+err;
-    liftArray(j) = liftArray(j)+err;
-end
 
 for i=1:length(rudderArray)
     realDrag(i) = 1-dragArray(i);
