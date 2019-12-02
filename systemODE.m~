@@ -26,15 +26,8 @@ R = calculateR(phi);
 
 [Fm, Fl, Fh] = get_force_torque(omega, delta);
 
-switch(resultAccuracy)
-    case 0
-        F = Fl';
-    case 1
-        F = Fm';
-    case 2
-        F = Fh';
-end
-
+switch(resultAccurac
+F = F';
 
 [A, B] = systemMatrix(R, invM, D, F);
 

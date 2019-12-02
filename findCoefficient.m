@@ -16,12 +16,14 @@ if not(and(length(liftArray) == length(dragArray), length(dragArray) == length(r
 end
 
 realDrag = [];
-realLift = liftArray;
 
 for j=1:length(rudderArray)
     dragArray(j) = dragArray(j)+err;
     liftArray(j) = liftArray(j)+err;
 end
+
+realLift = liftArray;
+
 
 for i=1:length(rudderArray)
     realDrag(i) = 1-dragArray(i);
