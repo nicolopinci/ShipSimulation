@@ -27,10 +27,6 @@ for i=1:length(timespan)-1
 
     solutionPID(:,i+1) = solutionPID(:,i) + dt*(K1/6 + K2/3 + K3/3 + K4/6); % Discrete step
 end
-
-abs_err = abs(solutionPID(3, length(timespan)-1) - desiredAngle);
-rel_err_perc = 100*abs_err/desiredAngle
-
-    
+ 
 end
 

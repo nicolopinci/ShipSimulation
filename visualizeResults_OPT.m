@@ -83,5 +83,17 @@ fplot(@(t) tan(pi/2 - desiredAngle)*t, 'k.')
 legend( 'Without PID (average)', 'Without PID (low)', 'Without PID (high)', 'With PID (average)', 'With PID (low)', 'With PID (high)', 'Objective trajectory')
 
 hold off
+
+[abs_err, rel_err_perc] = calculateAbsoluteAndRelativeError(solutionPID(3,end), desiredAngle);
+showErrorsMessage(abs_err, rel_err_perc, "average");
+
+[abs_err_low, rel_err_perc_low] = calculateAbsoluteAndRelativeError(solutionPIDlow(3, end), desiredAngle);
+showErrorsMessage(abs_err_low, rel_err_perc_low, "low");
+
+[abs_err_high, rel_err_perc_high] = calculateAbsoluteAndRelativeError(solutionPIDhigh(3, end), desiredAngle);
+showErrorsMessage(abs_err_high, rel_err_perc_high, "high");
+
+
+
 end
 

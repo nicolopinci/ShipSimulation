@@ -8,10 +8,6 @@ function [F, Fl, Fh] = get_force_torque(omega,delta)
 [fLl, fDl] = findCoefficient(rudderArray, liftArray, dragArray, -accuracy/2);
 [fLh, fDh] = findCoefficient(rudderArray, liftArray, dragArray, accuracy/2);
 
-%visualizeInterpolation(rudderArray, fLl, fLh, fL, 2, 'f_L');
-%visualizeInterpolation(rudderArray, fDl, fDh, fD, 3, 'f_D');
-
-
 F = get_force_torque_OPT(omega,delta, fL, fD);
 Fl = get_force_torque_OPT(omega,delta, fLl, fDl);
 Fh = get_force_torque_OPT(omega,delta, fLh, fDh);
