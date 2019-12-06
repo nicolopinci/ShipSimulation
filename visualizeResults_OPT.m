@@ -9,8 +9,6 @@ plotForceAgainstShaftSpeed(-132, 132, 0.1, 147000, 165000, 1);
 visualizeInterpolation(rudderArray, fLl, fLh, fL, 2, 'f_L');
 visualizeInterpolation(rudderArray, fDl, fDh, fD, 3, 'f_D');
 
-
-
 %Heading
 figure(4)
 
@@ -93,8 +91,6 @@ showErrorsMessage(abs_err_low, rel_err_perc_low, "low");
 
 [abs_err_high, rel_err_perc_high] = calculateAbsoluteAndRelativeError(solutionPIDhigh(3, end), desiredAngle);
 showErrorsMessage(abs_err_high, rel_err_perc_high, "high");
-
-
 
 end
 

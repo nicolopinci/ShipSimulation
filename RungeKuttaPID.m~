@@ -12,7 +12,7 @@ e_int = 0;
 %%% 4th order Runge-Kutta method
 for i=1:length(timespan)-1
    
-    e = solutionPID(3,i)-desiredAngle; % error (desiredAngle - OUTPUT)
+    e = solutionPID(3,i); % error (desiredAngle - OUTPUT)
 
     e_int = e_int + e; % discrete integration
     

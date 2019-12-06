@@ -14,7 +14,7 @@ function dXdt = systemODE_OPT(t, X, invM, D, omega, control_signal, pid, bypassP
 %   pid is the input to the ship system and it takes into account the
 %   contrl signal, the backpropagation and the desired angle.
 
-phi = X(3);
+phi = wrapTo2Pi(X(3));
 
 if (bypassPID==false)
     delta = pid; % the input of the system is the output of the PID

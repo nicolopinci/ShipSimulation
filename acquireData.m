@@ -27,7 +27,7 @@ Kp = 10;
 Ki = 0.0001;
 Kd = 0.0001;
 
-desiredAngle = pi/6; % desired heading angle; 30 degrees in the world reference frame --> pi - pi/6 rad
+desiredAngle = pi + pi/6; % desired heading angle; 30 degrees in the world reference frame --> pi/6 rad
 
 end
 
