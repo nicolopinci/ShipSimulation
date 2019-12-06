@@ -11,7 +11,7 @@ e_int = 0;
 
 %%% 4th order Runge-Kutta method
 for i=1:length(timespan)-1
-    %e = deg2rad(control_function(timespan(i))) - solutionPID(3,i) + desiredAngle; % error (INPUT - OUTPUT + desiredAngle)
+   
     e = desiredAngle - solutionPID(3,i); % error (desiredAngle - OUTPUT)
 
     e_int = e_int + e; % discrete integration

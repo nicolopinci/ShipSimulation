@@ -15,22 +15,13 @@ if not(and(length(liftArray) == length(dragArray), length(dragArray) == length(r
     error("Please use arrays with the same size");
 end
 
-realDrag = [];
-
 for j=1:length(rudderArray)
     dragArray(j) = dragArray(j)+err;
     liftArray(j) = liftArray(j)+err;
 end
 
-realLift = liftArray;
-
-
-for i=1:length(rudderArray)
-    realDrag(i) = 1-dragArray(i);
-end
-
-fL = polyfit(rudderArray, realLift, 3); % interpolation with a grade 3 polynomial function
-fD = polyfit(rudderArray, realDrag, 3); % interpolation with a grade 3 polynomial function
+fL = polyfit(rudderArray, liftArray, 3); % interpolation with a grade 3 polynomial function
+fD = polyfit(rudderArray, dragArray, 3); % interpolation with a grade 3 polynomial function
 
 end
 

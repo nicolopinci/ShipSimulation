@@ -32,13 +32,13 @@ plot(time, wrapTo2Pi(solutionL(3,:)));
 
 grid on
 hold on
-plot(time, solutionPID(3,:));
+plot(time, wrapTo2Pi(solutionPID(3,:)));
 
 hold on
-plot(timeL, solutionPIDlow(3,:));
+plot(timeL, wrapTo2Pi(solutionPIDlow(3,:)));
 
 hold on
-plot(timeH, solutionPIDhigh(3,:));
+plot(timeH, wrapTo2Pi(solutionPIDhigh(3,:)));
 
 hold on
 fplot(desiredAngle, 'k.')
