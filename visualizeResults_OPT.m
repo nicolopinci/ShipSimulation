@@ -20,28 +20,29 @@ ylabel('Heading [rad]')
 
 
 hold on
-plot(time, wrapTo2Pi(solution(3,:)));
+plot(time, (solution(3,:)));
 
 
 hold on
-plot(time, wrapTo2Pi(solutionH(3,:)));
+plot(time, (solutionH(3,:)));
 
 hold on
-plot(time, wrapTo2Pi(solutionL(3,:)));
+plot(time, (solutionL(3,:)));
 
 
 grid on
 hold on
-plot(time, wrapTo2Pi(solutionPID(3,:)));
+plot(time, (solutionPID(3,:)));
 
 hold on
-plot(timeL, wrapTo2Pi(solutionPIDlow(3,:)));
+plot(timeL, (solutionPIDlow(3,:)));
 
 hold on
-plot(timeH, wrapTo2Pi(solutionPIDhigh(3,:)));
+plot(timeH, (solutionPIDhigh(3,:)));
 
 hold on
 fplot(desiredAngle, 'k.')
+fplot(desiredAngle -2*pi, 'k.')
 
 
 legend('Without PID (average)', 'Without PID (low)', 'Without PID (high)', 'With PID (average)','With PID (low)','With PID (high)','Objective heading')
