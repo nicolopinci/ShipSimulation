@@ -2,9 +2,11 @@ function [] = visualizeResults_OPT(rudderArray, fLl, fLh, fL, fDl, fDh, fD, solu
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
-% Plot T0
-plotForceAgainstShaftSpeed(-132, 132, 0.1, 147000, 165000, 1);
+[minShaftSpeed, maxShaftSpeed] = getShaftSpeedLimits();
+[kp, kn] = getKpKn();
 
+% Plot T0
+plotForceAgainstShaftSpeed(minShaftSpeed, maxShaftSpeed, 0.1, kp, kn, 1);
 
 visualizeInterpolation(rudderArray, fLl, fLh, fL, 2, 'f_L');
 visualizeInterpolation(rudderArray, fDl, fDh, fD, 3, 'f_D');
@@ -42,12 +44,9 @@ hold on
 fplot(desiredAngle, 'k.')
 fplot(desiredAngle -2*pi, 'k.')
 
-
 legend('Without PID (average)', 'Without PID (low)', 'Without PID (high)', 'With PID (average)','With PID (low)','With PID (high)','Objective heading')
 
 hold off
-
-
 
 
 % Trajectory

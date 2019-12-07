@@ -2,9 +2,11 @@ function [] = visualizeResults(solutionL, solutionH, solution, solutionPIDlow, s
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
-% Plot T0
-plotForceAgainstShaftSpeed(-132, 132, 0.1, 147000, 165000, 1);
+[minShaftSpeed, maxShaftSpeed] = getShaftSpeedLimits();
+[kp, kn] = getKpKn();
 
+% Plot T0
+plotForceAgainstShaftSpeed(minShaftSpeed, maxShaftSpeed, 0.1, kp, kn, 1);
 
 %Heading
 figure(4)
@@ -15,14 +17,14 @@ ylabel('Heading [rad]')
 
 
 hold on
-plot(time, wrapTo2Pi(solution(3,:)));
+plot(time, (solution(3,:)));
 
 
 hold on
-plot(time, wrapTo2Pi(solutionH(3,:)));
+plot(time, (solutionH(3,:)));
 
 hold on
-plot(time, wrapTo2Pi(solutionL(3,:)));
+plot(time, (solutionL(3,:)));
 
 
 grid on

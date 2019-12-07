@@ -1,7 +1,6 @@
-function [control_function, rudderArray, liftArray, dragArray, accuracy, invM, timespan, dt, M, D, X0, omega, Kp, Ki, Kd, desiredAngle] = acquireData()
+function [control_function, rudderArray, liftArray, dragArray, accuracy, invM, timespan, dt, M, D, X0, omega, Kp, Ki, Kd, desiredAngle, kp, kn] = acquireData()
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
-
 
 omega = rpmToHz(100); % Initial omega = 100 rpm (= 100/60 Hz)
 
@@ -27,7 +26,7 @@ Kp = 10;
 Ki = 0.0001;
 Kd = 0.0001;
 
-desiredAngle = pi + pi/6; % desired heading angle; 30 degrees in the world reference frame --> pi/6 rad
+desiredAngle = pi - pi/6; % desired heading angle; 30 degrees in the world reference frame --> pi/6 rad
 
 end
 
