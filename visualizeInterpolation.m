@@ -1,6 +1,7 @@
 function [] = visualizeInterpolation(rudderArray, low, high, medium, fig_num, name)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%visualizeInterpolation This function allows to show the result of the
+%interpolation of the coefficients fD and fL.
+%   This function is part of the visualization (or presentation) part.
 
 % Interpolation
 figure(fig_num);

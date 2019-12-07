@@ -12,7 +12,7 @@ distance = getDistanceCenterOfMass();
 
 T0 = calculateT0(kp, kn, omega, minShaftSpeed, maxShaftSpeed);
 
-if(omega<0) % The shaft has a negative rotation, therefore it is not possible to calculate the drag and the lift because of how the problam has been specified
+if(omega<0) % The shaft has a n
     Fx = [T0 0 0];
     Fy = [0 0 0];
 else
@@ -24,11 +24,7 @@ else
     FyB = -Fy; % with respect to the body
 end
 
-TauzB = cross([distance 0 0], FyB+FxB); % the x distance is caused by the reference system change; the y distance has not been considered since the propellers are symmetrical
+TauzB = cross([distance 0 0], FyB+FxB); % 41.5 is caused by the reference system change; 7.1 m has not been considered since the propellers are symmetrical
 F = FxB + FyB + TauzB; % with respect to the body
-
-% Note: the distance refers to the distance from the center of mass to the
-% x coordinate of the point on which the lift force is applied.
-
 end
 

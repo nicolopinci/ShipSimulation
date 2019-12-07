@@ -1,6 +1,9 @@
 function [fL, fD, fLl, fDl, fLh, fDh, time, solution, timeL, solutionL, timeH, solutionH, solutionPID, solutionPIDhigh, solutionPIDlow] = computeResults_OPT(rudderArray, liftArray, dragArray, accuracy, invM, D, omega, control_function, timespan, dt, X0, Kp,Ki, Kd, desiredAngle)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+%computeResults_OPT The business logic of the simulator (optimized version)
+%   This function corresponds to the core of the simulator and implements
+%   its business logic. It takes the acquired data as an input and outputs
+%   the data that can be used to visualize the results.
+
 [fL, fD] = findCoefficient(rudderArray, liftArray, dragArray, 0);
 [fLl, fDl] = findCoefficient(rudderArray, liftArray, dragArray, accuracy/2);
 [fLh, fDh] = findCoefficient(rudderArray, liftArray, dragArray, -accuracy/2);

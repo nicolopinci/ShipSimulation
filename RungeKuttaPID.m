@@ -1,6 +1,8 @@
 function solutionPID = RungeKuttaPID(Kp,Ki, Kd, desiredAngle, timespan, X0, invM, D, omega, control_function, fL, fD, dt)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%RungeKuttaPID This function returns the solutions of the feedback system
+%in case the PID controller is inserted.
+%   The simulation has been performed by using the 4th order Runge-Kutta
+%   method.
 
 solutionPID = zeros(6, length(timespan)); % the initial solution matrix (dimension timespan x 6) is filled with 0s.
 solutionPID(:,1) = X0; % the initial state is X0 ([0 0 0 0 0 0]')

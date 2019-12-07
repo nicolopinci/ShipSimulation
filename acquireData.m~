@@ -5,8 +5,7 @@ function [control_function, rudderArray, liftArray, dragArray, accuracy, invM, t
 %   they are stored in a database. Since this simulator does not access
 %   real data, this function replaces the data acquisition part in a real
 %   world scenario. In case the system is implemented in a real system,
-%   the content of this function should be replaced with some functions
-%   that are able to get the real data from the sensors.
+%   the content of this function should be replaced with
 
 omega = rpmToHz(100); % Initial omega = 100 rpm (= 100/60 Hz)
 

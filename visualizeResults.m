@@ -1,6 +1,8 @@
 function [] = visualizeResults(solutionL, solutionH, solution, solutionPIDlow, solutionPIDhigh, solutionPID, desiredAngle, timeL, timeH, time)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%visualizeResults This function allows to show the result of the
+%simulation (headings and trajectories) with and without the uncertainties
+%and with and without the PID controller.
+%   This function is part of the visualization (or presentation) part.
 
 [minShaftSpeed, maxShaftSpeed] = getShaftSpeedLimits();
 [kp, kn] = getKpKn();

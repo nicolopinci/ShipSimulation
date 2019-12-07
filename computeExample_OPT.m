@@ -1,4 +1,5 @@
-% Script to run the simulation with predefined parameters
+% Script to run the simulation with predefined parameters (optimized
+% version)
 
 % Data acquisition
 [control_function, rudderArray, liftArray, dragArray, accuracy, invM, timespan, dt, M, D, X0, omega, Kp, Ki, Kd, desiredAngle] = acquireData();
