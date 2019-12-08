@@ -1,8 +1,0 @@
-function [minShaft,maxShaft] = getShaftSpeedLimits()
-%getShaftSpeedLimits This function outputs the maximum speed of the
-%shaft, expressed in RPM
-%   Detailed explanation goes here
-minShaft = -132;
-maxShaft = 132;
-end
-
